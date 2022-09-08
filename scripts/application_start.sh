@@ -7,7 +7,8 @@ sudo chmod -R 777 /home/ec2-user/express-app
 cd /home/ec2-user/express-app
 
 #add npm and node to path
-export NVM_DIR="/home/ec2-user/.nvm" and [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+export NVM_DIR="/home/ec2-user/.nvm"  
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 #install node modules
 npm install
 
