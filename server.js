@@ -1,58 +1,89 @@
-const path = require("path");
-const express = require("express");
-const morgan = require("morgan");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
+// const path = require("path");
+// const express = require("express");
+// const morgan = require("morgan");
+// const dotenv = require("dotenv");
+// const mongoose = require("mongoose");
 
-const authRoute = require("./routes/authRoute");
-const userRoute = require("./routes/userRoute");
-const restaurantRoute = require("./routes/restaurantRoute");
-const orderRoute = require("./routes/orderRoute");
+// const authRoute = require("./routes/authRoute");
+// const userRoute = require("./routes/userRoute");
+// const restaurantRoute = require("./routes/restaurantRoute");
+// const orderRoute = require("./routes/orderRoute");
 
-dotenv.config();
-const app = express();
+// dotenv.config();
+// const app = express();
 
-// const DB_PASSWORD = process.env.DB_PASSWORD;
-// const DB = process.env.DB.replace("<PASSWORD>", DB_PASSWORD);
+// // const DB_PASSWORD = process.env.DB_PASSWORD;
+// // const DB = process.env.DB.replace("<PASSWORD>", DB_PASSWORD);
 
+// // mongoose
+// //   .connect(DB, {
+// //     useNewUrlParser: true,
+// //     useCreateIndex: true,
+// //     useFindAndModify: false,
+// //     useUnifiedTopology: true
+// //   })
+// //   .then(() => console.log("Connected to DB"));
+
+// mongoose.Promise = global.Promise;
+
+// const uri = `mongodb+srv://root:${process.env.DB_PASSWORD}@goodfood.5jnie6i.mongodb.net/test?retryWrites=true&w=majority`;
 // mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true
-//   })
-//   .then(() => console.log("Connected to DB"));
+//   .connect(uri)
+//   .then(() => console.log("Success"))
+//   .catch((err) => console.log(err));
 
-mongoose.Promise = global.Promise;
+// app.use(express.json());
 
-const uri = `mongodb+srv://root:${process.env.DB_PASSWORD}@goodfood.5jnie6i.mongodb.net/test?retryWrites=true&w=majority`;
-mongoose
-  .connect(uri)
-  .then(() => console.log("Success"))
-  .catch((err) => console.log(err));
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
 
-app.use(express.json());
+// // if (process.env.NODE_ENV === "development") {
+// //   app.use(morgan("dev"));
+// // }
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// // app.use("/api/auth", authRoute);
+// // app.use("/api/users", userRoute);
+// // app.use("/api/res", restaurantRoute);
+// // app.use("/api/order", orderRoute);
 
-app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
-app.use("/api/res", restaurantRoute);
-app.use("/api/order", orderRoute);
+// // if (process.env.NODE_ENV === "production") {
+// //   app.use(express.static("client/build"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+// //   app.get("*", (req, res) => {
+// //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// //   });
+// // }
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// // const port = process.env.PORT || 3000;
 
-const port = process.env.PORT || 3000;
+// app.listen(port, () => {
+//   console.log(`Listening from port ${port}`);
+// });
+
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send(
+    "<h1>Express Demo App</h1> <h4>Message: Success</h4> <p>Version 1.1</p>"
+  );
+});
+
+app.get("/products", (req, res) => {
+  res.send([
+    {
+      productId: "101",
+      price: 100,
+    },
+    {
+      productId: "102",
+      price: 150,
+    },
+  ]);
+});
 
 app.listen(port, () => {
-  console.log(`Listening from port ${port}`);
+  console.log(`Demo app is up and listening to port: ${port}`);
 });
