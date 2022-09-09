@@ -29,7 +29,7 @@ mongoose
   .connect(uri)
   .then(() => console.log("Success"))
   .catch((err) => console.log(err));
-
+app.options("*", cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
