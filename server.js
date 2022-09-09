@@ -33,7 +33,6 @@ mongoose
 app.use(cors());
 app.options("*", cors());
 app.use(express.json());
-
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
