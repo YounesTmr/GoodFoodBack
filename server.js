@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+var cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -29,6 +30,7 @@ mongoose
   .connect(uri)
   .then(() => console.log("Success"))
   .catch((err) => console.log(err));
+app.use(cors());
 app.options("*", cors());
 app.use(express.json());
 
