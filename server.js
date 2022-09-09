@@ -11,7 +11,6 @@ const orderRoute = require("./routes/orderRoute");
 
 dotenv.config();
 const app = express();
-
 // const DB_PASSWORD = process.env.DB_PASSWORD;
 // const DB = process.env.DB.replace("<PASSWORD>", DB_PASSWORD);
 
