@@ -5,23 +5,23 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please provide a name"],
+    required: [true, "Veuillez renseigner un nom"],
   },
   email: {
     type: String,
-    required: [true, "Please provide an email"],
+    required: [true, "Veuillez renseigner une adresse mail"],
     unique: true,
-    validate: [validator.isEmail, "Please provide a valid email"],
+    validate: [validator.isEmail, "Veuillez renseigner une adresse mail valide"],
   },
   password: {
     type: String,
-    required: [true, "Please provide a password"],
+    required: [true, "Veuillez renseigner un mot de passe"],
     minlength: 8,
     select: false,
   },
   adress: {
     type: String,
-    required: [true, "Please provide an adress"],
+    required: [true, "Veuillez renseigner une adresse"],
   },
   role: {
     type: String,

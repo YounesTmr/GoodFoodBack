@@ -21,6 +21,10 @@ const restaurantSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter the contact number of the restaurant"]
   },
+  visible: {
+    type: Boolean,
+    default: true
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User"

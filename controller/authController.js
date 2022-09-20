@@ -20,6 +20,20 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+exports.isUserLoggedIn = async (req, res, next) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token)
+      return res.status(401).json({ msg: "Authorization denied" });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.id;
+    return res.status(200).json({ status: true });
+  } catch (err) {
+    console.log(err.message);
+    res.status(401).json({ msg: err.message });
+  }
+};
+
 // Only for certain roles
 exports.roles = (roles) => {
   return async (req, res, next) => {

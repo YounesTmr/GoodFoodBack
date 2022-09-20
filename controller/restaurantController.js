@@ -12,7 +12,8 @@ exports.create = async (req, res, next) => {
       cuisine,
       description,
       contactNumber,
-      user
+      user,
+      visible: true
     });
 
     const dishes = await this.addDish(req.body.dishes);
@@ -66,6 +67,35 @@ exports.updateRestaurant = async (req, res) => {
     res.status(400).json({ status: "error", msg: err.message });
   }
 };
+
+// Delete Restaurant
+exports.deleteRestaurant = async (req, res) => {
+  try {
+    await Restaurant.findByIdAndDelete(req.params.id);
+    return this.getAllRestaurants(req, res);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).json({ status: "error", msg: err.message });
+  }
+};
+
+// Desactivate Restaurant
+exports.desactiveRestaurant = async (req, res) => {
+  try {
+    const restaurant = await Restaurant.findByIdAndUpdate(
+      req.params.id,
+      { visible: false },
+      {
+        new: true
+      }
+    );
+    res.status(201).json({ status: "success", data: { restaurant } });
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ status: "error", msg: err.message });
+  }
+};
+
 
 // Get Restaurant by user
 exports.getMyRes = async (req, res) => {

@@ -12,22 +12,11 @@ const orderRoute = require("./routes/orderRoute");
 
 dotenv.config();
 const app = express();
-// const DB_PASSWORD = process.env.DB_PASSWORD;
-// const DB = process.env.DB.replace("<PASSWORD>", DB_PASSWORD);
-// mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true
-//   })
-//   .then(() => console.log("Connected to DB"));
 
 mongoose.Promise = global.Promise;
 
-const uri = `mongodb+srv://root:${process.env.DB_PASSWORD}@goodfood.5jnie6i.mongodb.net/test?retryWrites=true&w=majority`;
 mongoose
-  .connect(uri)
+  .connect(process.env.DB)
   .then(() => console.log("Success"))
   .catch((err) => console.log(err));
 app.use(cors());
@@ -54,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Listening from port ${port}`);
