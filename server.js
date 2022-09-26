@@ -4,6 +4,7 @@ var cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const expressOasGenerator = require("express-oas-generator");
 
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
@@ -44,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 8080;
-
+expressOasGenerator.init(app, {});
 app.listen(port, () => {
   console.log(`Listening from port ${port}`);
 });
