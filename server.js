@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 8080;
+
 expressOasGenerator.init(app, {});
 app.listen(port, () => {
   console.log(`Listening from port ${port}`);
